@@ -7,6 +7,10 @@ void Katalan() {
 	cout << "Введите длину последовательности: ";
 	cin >> n;
 	__asm {
+       
+		MOV eax, 1 // В EAX будет факториал, на это число мы будем умножать все остальные.
+		MOV ecx, n
+		JMP factCycle //EAX=n!
 		
 		MOV eax, n
 		ADD eax, n   //2*n
@@ -15,6 +19,14 @@ void Katalan() {
 		MOV ecx, n
 		JMP factCycle //EAX=(2*n)!
 
+		MOV ans, eax
+
+		MOV eax, n
+		ADD eax, 1   //n+1
+		MOV n, eax
+		MOV eax, 1 // В EAX будет факториал, на это число мы будем умножать все остальные.
+		MOV ecx, n
+		JMP factCycle //EAX=(n+1)!
 
 
 
