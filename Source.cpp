@@ -3,10 +3,10 @@
 using namespace std;
 
 void Katalan() {
-	int n=0,
-		ans=1;
+	int n;
+	unsigned long ans;
 	cout << "Введите длину последовательности: ";
-	//cin >> n;
+	cin >> n;
 	__asm {
 		MOV eax, 1 // В EAX будет факториал, на это число мы будем умножать все остальные.
 		CMP n, 0 //проверка на ноль
@@ -48,11 +48,152 @@ void Katalan() {
 		   MOV ans, eax
 	};
 
-	cout << "ответ: "<<ans;
+	cout << "\nответ: "<<ans;
+}
+
+void Katalan2() {
+	int n;
+	double sum2 = 0;
+	double sum1 = 0;
+	double sum0 = 0;
+	double sum = 0;
+	cout << "Введите длину последовательности: ";
+	cin >> n;
+	__asm {
+
+		CMP n, 0 //проверка на ноль
+		JE endd
+
+
+
+
+
+	factCycle:
+		    
+			CMP ecx, 0
+			JNE ecxnull
+			MOV sum0, 0
+			MOV sum1, 1
+			JMP endfactCycle
+		ecxnull:
+		    
+		    MOV eax,sum2
+		    MUL sum1
+		    ADD sum0, eax
+			MOV sum0,eax
+
+	    endfactCycle:
+		    ADD ecx, 1
+		    CMP ecx,subn
+		    JNE factCycle
+	//LOOP factCycle
+		//MOV ebx, 1 //(n - 1) - i=0 первая итерация
+		//MOV ecx, 0 //(n - 1) - i=0 первая итерация
+		//summa:
+		//
+		////MOV ecx, n
+		//CMP ecx, 0 //проверка на ноль if (n == 0)
+		//JE nnull
+
+		//
+
+		//	nnull :
+		//MOV ebx, 1
+		//	notsumma:
+  //      ADD sum, ebx //sum=1
+
+		//    forr:
+  //     //i-- i
+		//MOV eax, n
+		//SUB eax, 1  //n-1
+		//MOV ecx, eax //n=n-1 
+		//MOV ebx, 0 //ebx=0
+		//CALL summaa
+
+		////-->
+
+		//MOV eax, ebx
+		//MUL sum      //eax=sum*ebx (so(i))
+		//ADD sum, eax //sum=sum*ebx (so(i))
+
+		//MOV eax, n
+		//SUB eax, 1  //n-1
+		//MOV n, eax //n=n-1 
+		//MOV ecx, eax //ecx=n-1
+		//CMP ecx, 0
+		//JNE forr
+
+		//	summaa:
+
+		//MOV eax, n
+		//SUB eax, 1  //n-1
+		//MOV n, eax //n=n-1
+
+		//MOV eax, ebx
+		//MOV ecx, n
+		//CMP ecx, 0
+		//JNE summaa
+		//RET
+		//JMP notsumma
+
+		//	endd:
+		//MOV sum, 1
+//---------------------------------
+	};
+
+	cout << "\nответ: " << sum;
+}
+
+void Katalan3() {
+	int n=4;
+	long sum = 1;
+	cout << "Введите длину последовательности: ";
+	//cin >> n;
+	__asm {
+		/*XOR ecx,ecx*/
+		CMP n, 0 //проверка на ноль
+		JE endd
+
+		//CMP n, 1 //проверка на ноль
+		//JE endd
+
+		MOV ecx, 1
+
+		   summa:
+        MOV eax, ecx
+		MOV ebx, 4
+		MUL ebx    //4n
+		SUB eax, 2 //4n-2
+
+		MOV ebx, ecx
+		INC ebx      //можно заменить на ADD ebx, 1 ;n+1
+		MUL sum      //(4n-2)*sum
+		DIV ebx      //(4n-2)/(n+1) eax/ebx
+
+		MUL sum
+		/*CMP sum,1*/
+		MOV sum, eax
+
+		INC ecx
+		CMP ecx, n
+		JNE summa
+		
+		JMP enddd
+
+			endd :
+		MOV sum, 1
+
+		    enddd:
+			//---------------------------------
+	};
+
+	cout << "\nответ: " << sum;
 }
 
 int main() {
 	setlocale(0,"");
-	Katalan();
+	//Katalan();
+	//Katalan2();
+	Katalan3();
 	return 0;
 }
