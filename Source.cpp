@@ -145,7 +145,7 @@ void Katalan2() {
 }
 
 void Katalan3() {
-	int n=15;
+	int n;
 	long sum = 1;
 	cout << "Введите длину последовательности: ";
 	cin >> n;
@@ -183,7 +183,7 @@ endd:
 
 int main() {
 	setlocale(0,"");
-	//Katalan();
+	//Katalan(); //(2n)!/(n+1)!n! работает только до 6
 	//Katalan2();//C(N + 1) = C(N + 1) + C(I) * C(N - I) не работает
 	Katalan3();//c=2*(2*i-1)*c/(i+1)
 	return 0;
