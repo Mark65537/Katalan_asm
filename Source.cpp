@@ -4,7 +4,7 @@ using namespace std;
 
 void Katalan1() {
 	int n;
-	unsigned long long int ans;
+	long int ans;
 	cout << "¬ведите длину последовательности: ";
 	cin >> n;
 	__asm {
