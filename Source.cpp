@@ -68,24 +68,24 @@ void Katalan2() {
 
 
 
-	factCycle:
-		    
-			CMP ecx, 0
-			JNE ecxnull
-			MOV sum0, 0
-			MOV sum1, 1
-			JMP endfactCycle
-		ecxnull:
-		    
-		    MOV eax,sum2
-		    MUL sum1
-		    ADD sum0, eax
-			MOV sum0,eax
+	////factCycle:
+	////	    
+	////		CMP ecx, 0
+	////		JNE ecxnull
+	////		MOV sum0, 0
+	////		MOV sum1, 1
+	////		JMP endfactCycle
+	////	ecxnull:
+	////	    
+	////	    MOV eax,sum2
+	////	    MUL sum1
+	////	    ADD sum0, eax
+	////		MOV sum0,eax
 
-	    endfactCycle:
-		    ADD ecx, 1
-		    CMP ecx,subn
-		    JNE factCycle
+	////    endfactCycle:
+	////	    ADD ecx, 1
+	////	    CMP ecx,subn
+	////	    JNE factCycle
 	//LOOP factCycle
 		//MOV ebx, 1 //(n - 1) - i=0 первая итерация
 		//MOV ecx, 0 //(n - 1) - i=0 первая итерация
@@ -136,8 +136,8 @@ void Katalan2() {
 		//RET
 		//JMP notsumma
 
-		//	endd:
-		//MOV sum, 1
+			endd:
+		//MOV sum, 1		
 //---------------------------------
 	};
 
@@ -145,22 +145,20 @@ void Katalan2() {
 }
 
 void Katalan3() {
-	int n=4;
+	int n=15;
 	long sum = 1;
 	cout << "Введите длину последовательности: ";
-	//cin >> n;
+	cin >> n;
 	__asm {
-		/*XOR ecx,ecx*/
+
 		CMP n, 0 //проверка на ноль
 		JE endd
 
-		//CMP n, 1 //проверка на ноль
-		//JE endd
-
-		MOV ecx, 1
-
-		   summa:
-        MOV eax, ecx
+		XOR ecx, ecx
+   
+summa:
+		INC ecx
+		MOV eax, ecx
 		MOV ebx, 4
 		MUL ebx    //4n
 		SUB eax, 2 //4n-2
@@ -168,23 +166,16 @@ void Katalan3() {
 		MOV ebx, ecx
 		INC ebx      //можно заменить на ADD ebx, 1 ;n+1
 		MUL sum      //(4n-2)*sum
-		DIV ebx      //(4n-2)/(n+1) eax/ebx
+		DIV ebx      //(4n-2)*sum/(n+1) eax/ebx
 
-		MUL sum
+		//MUL sum
 		/*CMP sum,1*/
 		MOV sum, eax
 
-		INC ecx
+		
 		CMP ecx, n
 		JNE summa
-		
-		JMP enddd
-
-			endd :
-		MOV sum, 1
-
-		    enddd:
-			//---------------------------------
+endd:
 	};
 
 	cout << "\nответ: " << sum;
@@ -193,7 +184,7 @@ void Katalan3() {
 int main() {
 	setlocale(0,"");
 	//Katalan();
-	//Katalan2();
-	Katalan3();
+	//Katalan2();//C(N + 1) = C(N + 1) + C(I) * C(N - I) не работает
+	Katalan3();//c=2*(2*i-1)*c/(i+1)
 	return 0;
 }
